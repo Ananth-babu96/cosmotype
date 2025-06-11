@@ -1,0 +1,342 @@
+:root {
+   --light-mode-bg: #f9f9f9;
+   --light-mode-font: #292929;
+   --light-mode-primary: #1e90ff;
+   --dark-mode-bg: #202020;
+   --dark-one-primary: #ffe400;
+   --dark-two-primary: #00ff7f;
+   --dark-three-primary: #00ffff;
+   --dark-words-color: #747474;
+}
+
+body {
+   font-family: "Montserrat", sans-serif;
+}
+
+h1 {
+   font-size: 34px;
+   font-weight: 600;
+}
+
+.btn {
+   background: rgb(195, 102, 20);
+   width: fit-content;
+   height: 30px;
+   padding: 0 12px;
+   border-radius: 12px;
+   color: #fff;
+   font-weight: 500;
+}
+
+/* =================== Words Container =================== */
+#words-container {
+   font-family: "Courier Prime", monospace;
+   height: 140px;
+   overflow: hidden;
+   outline: none;
+   border: none;
+}
+
+#words {
+   line-height: 48px;
+   filter: blur(5px);
+}
+
+#words-container:focus #words {
+   filter: none;
+}
+
+.correct {
+   color: green;
+}
+
+.incorrect {
+   color: red;
+}
+
+.underline {
+   text-decoration: underline;
+   text-decoration-color: red;
+}
+
+/* =================== Focus Error =================== */
+#focus-error {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   font-size: 24px;
+   font-family: "Montserrat";
+   font-weight: 500;
+}
+
+#words-container:focus #focus-error {
+   display: none;
+}
+
+/* =================== Result & Caret =================== */
+#result-board {
+   display: flex;
+}
+
+#caret {
+   transition: left 0.1s linear;
+   display: none;
+}
+
+#words-container:focus #caret {
+   display: block;
+}
+
+.caret-animation {
+   animation: caretBlink 0.4s infinite;
+}
+
+@keyframes caretBlink {
+   0%,
+   100% {
+      opacity: 100%;
+   }
+   50% {
+      opacity: 0%;
+   }
+}
+
+/* =================== Duration & Type Highlight =================== */
+
+/* =================== Theme: dark Mode =================== */
+body.dark {
+   background: var(--dark-mode-bg);
+}
+body.dark h1 {
+   color: var(--dark-three-primary);
+}
+body.dark h1 span {
+   color: orange;
+}
+
+body.dark .game-settings-menu {
+   border: 2px solid var(--dark-three-primary);
+   color: var(--dark-three-primary);
+}
+body.dark #words {
+   color: var(--dark-words-color);
+}
+body.dark .correct {
+   color: #f1f1f1;
+}
+body.dark .incorrect {
+   color: #ff2200;
+}
+body.dark .underline {
+   text-decoration: underline;
+   text-decoration-color: #ff2200;
+}
+body.dark #timeleft {
+   color: #fff;
+}
+body.dark #result-board {
+   color: var(--dark-three-primary);
+}
+body.dark #wpm,
+body.dark #accuracy {
+   color: orange;
+}
+body.dark #reset {
+   color: var(--dark-three-primary);
+}
+body.dark #focus-error {
+   color: #fff;
+}
+body.dark #game-type-menu,
+body.dark #duration-menu,
+body.dark #theme-menu {
+   border: 2px solid var(--dark-three-primary);
+}
+body.dark .current-type {
+   background: orange;
+   color: var(--dark-mode-bg);
+   font-weight: 500;
+}
+body.dark .current-duration {
+   color: orange;
+}
+body.dark #caret {
+   background: orange;
+}
+/* body.light {
+   background: var(--light-mode-bg);
+   color: var(--light-mode-font);
+}
+
+body.light .game-settings-menu {
+   background: var(--dark-three-primary);
+   color: var(--light-mode-bg);
+}
+
+body.light #timeleft,
+body.light #reset {
+   color: var(--dark-three-primary);
+}
+
+body.light .incorrect {
+   color: var(--dark-three-primary);
+} */
+
+/* =================== Theme: Dark Modes =================== */
+/* body.dark-one,
+body.dark-two,
+body.dark-three {
+   background: var(--dark-mode-bg);
+}
+
+body.dark-one,
+body.dark-two,
+body.dark-three {
+   color: var(--dark-one-primary);
+}
+
+body.dark-two {
+   color: var(--dark-two-primary);
+}
+
+body.dark-three {
+   color: var(--dark-three-primary);
+}
+
+body:is(.dark-one, .dark-two, .dark-three) #words-container #words {
+   color: var(--dark-words-color);
+}
+
+body:is(.dark-one, .dark-two, .dark-three) .result-title {
+   color: var(--dark-words-color);
+}
+
+body.dark-one .correct {
+   color: var(--dark-one-primary);
+}
+
+body.dark-two .correct {
+   color: var(--dark-two-primary);
+}
+
+body.dark-three .correct {
+   color: var(--light-mode-bg);
+}
+
+body.dark-one .incorrect {
+   color: #e34234;
+}
+body.dark-one .underline {
+   text-decoration-color: #e34234;
+}
+
+body.dark-two .incorrect {
+   color: #e34234;
+}
+body.dark-two .underline {
+   text-decoration-color: #e34234;
+}
+
+body.dark-three .incorrect {
+   color: var(--dark-three-primary);
+}
+
+body.dark-one .game-settings-menu {
+   background: var(--dark-one-primary);
+   color: var(--dark-mode-bg);
+}
+
+body.dark-two .game-settings-menu {
+   background: var(--dark-two-primary);
+   color: var(--dark-mode-bg);
+}
+
+body.dark-three .game-settings-menu {
+   background: var(--dark-three-primary);
+   color: var(--dark-mode-bg);
+}
+
+body.dark-one #wpm,
+body.dark-one #accuracy {
+   color: var(--dark-one-primary);
+}
+
+body.dark-two #wpm,
+body.dark-two #accuracy {
+   color: var(--dark-two-primary);
+}
+
+body.dark-three #wpm,
+body.dark-three #accuracy {
+   color: var(--dark-three-primary);
+}
+
+body.dark-one #timeleft,
+body.dark-one #reset {
+   color: var(--dark-one-primary);
+}
+
+body.dark-two #timeleft,
+body.dark-two #reset {
+   color: var(--dark-two-primary);
+}
+
+body.dark-three #timeleft,
+body.dark-three #reset {
+   color: var(--dark-three-primary);
+}
+
+body.light #game-type-menu,
+body.light #duration-menu,
+body.light #theme-menu {
+   background: var(--dark-three-primary);
+   border: 2px solid var(--dark-three-primary);
+}
+body.dark-one #game-type-menu,
+body.dark-one #duration-menu,
+body.dark-one #theme-menu {
+   background: var(--dark-one-primary);
+   border: 2px solid var(--dark-one-primary);
+}
+body.dark-two #game-type-menu,
+body.dark-two #duration-menu,
+body.dark-two #theme-menu {
+   background: var(--dark-two-primary);
+   border: 2px solid var(--dark-two-primary);
+}
+body.dark-three #game-type-menu,
+body.dark-three #duration-menu,
+body.dark-three #theme-menu {
+   background: var(--dark-three-primary);
+   border: 2px solid var(--dark-three-primary);
+}
+
+body.light .current-duration,
+body.light .game-type.current-type,
+body.light .theme.current-theme {
+   background: var(--light-mode-bg);
+   color: var(--dark-three-primary);
+   font-weight: 500;
+}
+body.dark-one .current-duration,
+body.dark-one .game-type.current-type,
+body.dark-one .current-theme {
+   background: var(--dark-mode-bg);
+   color: var(--dark-one-primary);
+   font-weight: 500;
+}
+body.dark-two .current-duration,
+body.dark-two .game-type.current-type,
+body.dark-two .current-theme {
+   background: var(--dark-mode-bg);
+   color: var(--dark-two-primary);
+   font-weight: 500;
+}
+body.dark-three .current-duration,
+body.dark-three .game-type.current-type,
+body.dark-three .current-theme {
+   background: var(--dark-mode-bg);
+   color: var(--dark-three-primary);
+   font-weight: 800;
+} */
