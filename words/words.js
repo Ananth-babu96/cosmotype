@@ -1,9 +1,7 @@
 let data = {
-   facts: [],
+   eng200: [],
    eng1k: [],
-   eng5k: [],
    eng10k: [],
-   eng20k: [],
 };
 let factsList = {
    short: [],
@@ -23,7 +21,7 @@ const cleanHits = document.getElementById("cleanHits");
 const typos = document.getElementById("typos");
 const volumeBtn = document.getElementById("volume-btn");
 const lengths = document.querySelectorAll(".text-length");
-const keySound = new Audio("audio/key-press-sound.wav");
+const keySound = new Audio("../audio/key-press-sound.wav");
 const resultWrapper = document.getElementById("result-box-wrapper");
 
 keySound.volume = 0.4;
@@ -32,6 +30,7 @@ let gameInterval = null;
 let textData;
 let selectedDuration = 15;
 let selectedLength = "short";
+let selectedWordsCategory = "eng200";
 let timer = selectedDuration;
 let gameStarted = false;
 let gameOver = false;
@@ -51,11 +50,20 @@ const removeClass = (el, cls) => {
 };
 
 const calculateWpmAndAccuracy = () => {
-   // const minutes = selectedDuration / 60;
-   // const wordsperminute = Math.round(correctEntries / 5 / minutes);
-   // const acrcy = Math.round((correctEntries / totalTyped) * 100) || 0;
-   // wpm.textContent = wordsperminute;
-   // accuracy.textContent = `${acrcy}%`;
+   const elapsedTimeInMinutes = selectedDuration / 60;
+
+   const minutes = selectedDuration / 60;
+   const wordsperminute = Math.round(correctEntries / 5 / minutes);
+   const acrcy = Math.round((correctEntries / totalTyped) * 100) || 0;
+   const rawSpeed = Math.round(totalTyped / 5 / elapsedTimeInMinutes) || 0;
+   const mistakes = totalTyped - correctEntries;
+
+   if (wpm) wpm.textContent = wordsperminute;
+   if (accuracy) accuracy.textContent = `${acrcy}%`;
+   if (raw) raw.textContent = rawSpeed;
+   if (keyStrokes) keyStrokes.textContent = totalTyped;
+   if (cleanHits) cleanHits.textContent = correctEntries;
+   if (typos) typos.textContent = mistakes;
 };
 const updateCaretPosition = () => {
    const caret = document.getElementById("caret");
@@ -80,14 +88,14 @@ words.addEventListener("click", () => {
    themeMenu.classList.remove("grid");
    themeMenu.classList.add("hidden");
 });
-const updateCharCounter = () => {
-   const totalChars = document.querySelectorAll(".char").length;
-   const typedChars = document.querySelectorAll(
-      ".char.correct, .char.incorrect, .char.underline"
-   ).length;
+// const updateCharCounter = () => {
+//    const totalChars = document.querySelectorAll(".char").length;
+//    const typedChars = document.querySelectorAll(
+//       ".char.correct, .char.incorrect, .char.underline"
+//    ).length;
 
-   timeLeft.textContent = `${typedChars} / ${totalChars}`;
-};
+//    timeLeft.textContent = `${typedChars} / ${totalChars}`;
+// };
 
 const calculateWpmAndAccuracyNoTimer = () => {
    const elapsedTimeInMinutes = (Date.now() - gameStartTime) / 1000 / 60;
@@ -110,23 +118,35 @@ const calculateWpmAndAccuracyNoTimer = () => {
 //--------------------------CONENT LOAD----------------------------------//
 
 window.addEventListener("DOMContentLoaded", async () => {
-   const response = await fetch("./data.json");
+   const response = await fetch("../data.json");
 
    const list = await response.json();
 
-   data.facts = await list.facts;
-   data.english1k = await list.englishOneK;
-   data.english5k = await list.englishFivek;
-   data.english10k = await list.englishTenK;
-   data.english20k = await list.englishTwentyK;
+   data.eng200 = await list.eng200;
+   data.eng1k = await list.englishOneK;
+   data.eng10k = await list.englishTenK;
 
-   const factData = await fetch("./data/newdata.json");
+   const factData = await fetch("../data/newdata.json");
    const dataList = await factData.json();
 
    factsList.short = dataList.short;
    factsList.medium = dataList.medium;
    factsList.long = dataList.long;
-   selectedLength = localStorage.getItem("length") || "short";
+   console.log(factsList);
+   const savedWordsCat = localStorage.getItem("words-list");
+   if (savedWordsCat) {
+      selectedWordsCategory = savedWordsCat;
+   } else {
+      selectedWordsCategory = "eng200";
+   }
+   const savedDuration = localStorage.getItem("duration");
+   if (savedDuration) {
+      selectedDuration = Number(savedDuration);
+   } else {
+      selectedDuration = 15;
+   }
+   timer = selectedDuration;
+   timeLeft.textContent = timer;
    await generateText();
    const modeClass = window.localStorage.getItem("mode");
    if (modeClass) {
@@ -147,45 +167,64 @@ window.addEventListener("DOMContentLoaded", async () => {
          }
       }
    });
+   document.querySelectorAll(".wordsFrom").forEach((item) => {
+      const dataAttr = item.dataset.words;
+      const savedInLocalStrg = window.localStorage.getItem("words-list");
+
+      if (savedInLocalStrg) {
+         if (dataAttr === savedInLocalStrg) {
+            item.classList.add("current-words-list");
+         }
+      } else {
+         if (dataAttr === "eng200") {
+            item.classList.add("current-words-list");
+         }
+      }
+   });
    lengths.forEach((btn) => {
       btn.classList.remove("current-length");
-      const lengthData = btn.dataset.length;
-      const savedLengthData = localStorage.getItem("length");
-      if (savedLengthData) {
-         if (lengthData === savedLengthData) {
+      const lengthData = btn.dataset.duration;
+      const savedDurationData = localStorage.getItem("duration");
+      if (savedDurationData) {
+         if (lengthData === savedDurationData) {
             btn.classList.add("current-length");
          }
       } else {
-         if (lengthData === "short") {
+         if (lengthData === "15") {
             btn.classList.add("current-length");
          }
       }
    });
 
-   updateCharCounter();
    game.focus();
 });
 //-------------------------RANDOM TEXT GENERATION---------------------------------------
 
 const generateText = async () => {
-   let dataList =
-      selectedLength === "short"
-         ? factsList.short
-         : selectedLength === "medium"
-         ? factsList.medium
-         : selectedLength === "long"
-         ? factsList.long
+   let selectedWordsArr =
+      selectedWordsCategory === "eng200"
+         ? data.eng200
+         : selectedWordsCategory === "eng1k"
+         ? data.eng1k
+         : selectedWordsCategory === "eng10k"
+         ? data.eng10k
          : [];
 
-   if (!dataList || dataList.length === 0) {
-      console.warn("No data available for 'facts' mode");
-      return;
+   let arrIdx = [...Array(selectedWordsArr.length).keys()];
+   //    const maxItems = currentGameMode === "facts" ? 6 : 300;
+   //    const totalItems = Math.min(data[currentGameMode].length, maxItems);
+   let textList = [];
+   for (let i = 0; i < 300; i++) {
+      const randNum = Math.floor(Math.random() * arrIdx.length);
+      textList.push(selectedWordsArr[arrIdx[randNum]]);
+      arrIdx.splice(randNum, 1);
    }
-
-   let randIdx = Math.floor(Math.random() * dataList.length);
-   document.getElementById("words").innerHTML = dataList[randIdx]
+   document.getElementById("words").innerHTML = textList
+      .join(" ")
       .split("")
-      .map((c) => `<span class="char">${c}</span>`)
+      .map((c, _) => {
+         return `<span class="char">${c}</span>`;
+      })
       .join("");
 };
 
@@ -256,38 +295,40 @@ game.addEventListener("keydown", (e) => {
    let backSpace = pressedKey === "Backspace";
 
    if (letterOrSpace) {
-      // if (!gameStarted) {
-      //    gameStarted = true;
-      //    gameInterval = setInterval(() => {
-      //       timer -= 1;
-      //       timeLeft.innerHTML = timer;
-      //       if (timer <= 0) {
-      //          clearInterval(gameInterval);
-      //          gameOver = true;
-      //          caret.style.display = "none";
-      //          words.style.opacity = "0.5";
-      //          calculateWpmAndAccuracy();
-      //       }
-      //    }, 1000);
-      // }
       if (!gameStarted) {
          gameStarted = true;
-         gameStartTime = Date.now();
+         gameInterval = setInterval(() => {
+            timer -= 1;
+            timeLeft.innerHTML = timer;
+            if (timer <= 0) {
+               clearInterval(gameInterval);
+               gameOver = true;
+               words.style.opacity = "0.5";
+               clearInterval(gameInterval); // Stop timer if user finishes early
+               calculateWpmAndAccuracy();
+               removeClass(resultWrapper, "hidden");
+               addClass(resultWrapper, "flex");
+            }
+         }, 1000);
       }
-      if (!currentChar.nextSibling) {
-         gameOver = true;
-         caret.style.display = "none";
-         words.style.opacity = "0.5";
-         clearInterval(gameInterval); // Stop timer if user finishes early
-         calculateWpmAndAccuracyNoTimer();
-         removeClass(resultWrapper, "hidden");
-         addClass(resultWrapper, "flex");
-         // if (currentGameMode === "facts") {
-         //    calculateWpmAndAccuracyNoTimer();
-         // } else {
-         //    calculateWpmAndAccuracy();
-         // }
-      }
+      //   if (!gameStarted) {
+      //      gameStarted = true;
+      //      gameStartTime = Date.now();
+      //   }
+      // if (!currentChar.nextSibling) {
+      //    gameOver = true;
+      //    caret.style.display = "none";
+      //    words.style.opacity = "0.5";
+      //    clearInterval(gameInterval);
+      //    calculateWpmAndAccuracyNoTimer();
+      //    removeClass(resultWrapper, "hidden");
+      //    addClass(resultWrapper, "flex");
+      //    if (currentGameMode === "facts") {
+      //       calculateWpmAndAccuracyNoTimer();
+      //    } else {
+      //       calculateWpmAndAccuracy();
+      //    }
+      // }
       removeClass(document.getElementById("caret"), "caret-animation");
 
       if (pressedKey === expected) {
@@ -303,9 +344,10 @@ game.addEventListener("keydown", (e) => {
          keySound.currentTime = 0;
          keySound.play();
       }
-      updateCharCounter();
-      addClass(currentChar.nextSibling, "current");
-      removeClass(currentChar, "current");
+      if (currentChar.nextSibling) {
+         addClass(currentChar.nextSibling, "current");
+         removeClass(currentChar, "current");
+      }
    }
 
    if (backSpace) {
@@ -357,7 +399,6 @@ game.addEventListener("keydown", (e) => {
       addClass(currentChar.previousSibling, "current");
 
       updateCaretPosition();
-      updateCharCounter();
    }
 
    //-----------caret and line positioning------------
@@ -386,7 +427,7 @@ game.addEventListener("keydown", (e) => {
    }
 });
 
-//-------------------------------CHANGE GAME LENGTH----------------------------//
+//-------------------------------CHANGE GAME DURATION----------------------------//
 lengths.forEach((item) => {
    item.addEventListener("click", () => {
       // Remove 'current-length' from all buttons
@@ -396,8 +437,9 @@ lengths.forEach((item) => {
       item.classList.add("current-length");
 
       // Set selected length and reset
-      selectedLength = item.dataset.length;
-      localStorage.setItem("length", item.dataset.length);
+      selectedDuration = Number(item.dataset.duration);
+      timeLeft.textContent = selectedDuration;
+      localStorage.setItem("duration", item.dataset.duration);
       resetGame();
    });
 });
@@ -421,7 +463,6 @@ const resetGame = async () => {
    gameStartTime = null;
    words.style.opacity = "1";
    words.style.marginTop = "0px";
-   caret.style.display = "block";
    addClass(document.getElementById("caret"), "caret-animation");
 
    document.querySelectorAll(".char").forEach((el) => {
@@ -436,8 +477,6 @@ const resetGame = async () => {
    caret.style.left = `${rect.left - gameRect.left}px`;
    caret.style.top = `${rect.top - gameRect.top + 4}px`;
 
-   updateCharCounter();
-
    game.focus();
 };
 
@@ -446,6 +485,7 @@ document.getElementById("reset").addEventListener("click", () => {
 });
 
 //-----------------VOLUME BTN LOGIC ----------------------------------------//
+
 volumeBtn.addEventListener("click", () => {
    let volumeIcon = document.getElementById("volume-icon");
    if (volume) {
@@ -483,5 +523,19 @@ document.querySelectorAll(".colors").forEach((btn) => {
       document.body.classList.add(mode);
       localStorage.setItem("mode", mode);
       game.focus();
+   });
+});
+
+//-------------------------switch words modes------------------------------------------
+document.querySelectorAll(".wordsFrom").forEach((words) => {
+   words.addEventListener("click", () => {
+      const dataAttr = words.dataset.words;
+      selectedWordsCategory = dataAttr;
+      document.querySelectorAll(".wordsFrom").forEach((item) => {
+         item.classList.remove("current-words-list");
+      });
+      words.classList.add("current-words-list");
+      localStorage.setItem("words-list", dataAttr);
+      resetGame();
    });
 });

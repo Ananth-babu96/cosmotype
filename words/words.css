@@ -173,6 +173,12 @@ body.matrix #caret {
 body.matrix #colors-menu {
    color: #047a3f;
 }
+body.matrix #words-menu {
+   color: #047a3f;
+}
+body.matrix .current-words-list {
+   color: var(--matrix);
+}
 body.matrix .current-color-mode {
    color: var(--matrix);
 }
@@ -208,7 +214,6 @@ body.quantum a {
 }
 
 body.quantum #words-container #words {
-   filter: none;
    color: var(--purple);
 }
 body.quantum .current-length {
@@ -241,7 +246,13 @@ body.quantum #caret {
    background: #fff;
 }
 body.quantum #colors-menu {
+   color: #2a399b;
+}
+body.quantum #words-menu {
    color: #243187;
+}
+body.quantum .current-words-list {
+   color: var(--purple);
 }
 body.quantum .current-color-mode {
    color: var(--purple);
@@ -262,7 +273,6 @@ body.quantum #restart-button {
 body.quantum #volume-btn {
    color: var(--purple);
 }
-
 /* =================================================================================== */
 /* ===============================light mode======================================= */
 
@@ -281,7 +291,6 @@ body.ghostline a {
 }
 
 body.ghostline #words-container #words {
-   filter: none;
    color: #5d5d5d;
 }
 body.ghostline .current-length {
@@ -314,6 +323,12 @@ body.ghostline #caret {
 }
 body.ghostline #colors-menu {
    color: #898686;
+}
+body.ghostline #words-menu {
+   color: #898686;
+}
+body.ghostline .current-words-list {
+   color: #000;
 }
 body.ghostline .current-color-mode {
    color: #000;
@@ -352,9 +367,10 @@ body.void a {
    color: #d6e3ff;
    font-weight: 500;
 }
+
 body.void #words-container #words {
    filter: none;
-   color: #2b3134;
+   color: #424b4f;
 }
 body.void .current-length {
    background: #d6e3ff;
@@ -386,6 +402,12 @@ body.void #caret {
 }
 body.void #colors-menu {
    color: #757d8d;
+}
+body.void #words-menu {
+   color: #757d8d;
+}
+body.void .current-words-list {
+   color: #d6e3ff;
 }
 body.void .current-color-mode {
    color: #d6e3ff;
@@ -474,7 +496,6 @@ body.suncode a {
 }
 
 body.suncode #words-container #words {
-   filter: none;
    color: rgb(91, 91, 91);
 }
 body.suncode .current-length {
@@ -507,6 +528,12 @@ body.suncode #caret {
 }
 body.suncode #colors-menu {
    color: #665209;
+}
+body.suncode #words-menu {
+   color: #665209;
+}
+body.suncode .current-words-list {
+   color: var(--sun);
 }
 body.suncode .current-color-mode {
    color: var(--sun);
