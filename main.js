@@ -22,9 +22,12 @@ const keyStrokes = document.getElementById("keystrokes");
 const cleanHits = document.getElementById("cleanHits");
 const typos = document.getElementById("typos");
 const volumeBtn = document.getElementById("volume-btn");
+const volumeBtnMobile = document.getElementById("volume-btn-mobile");
 const lengths = document.querySelectorAll(".text-length");
 const keySound = new Audio("audio/key-press-sound.wav");
 const resultWrapper = document.getElementById("result-box-wrapper");
+const mobileMenuOpenBtn = document.getElementById("mobile-menu-open-btn");
+const mobileMenuCloseBtn = document.getElementById("mobile-menu-close-btn");
 
 keySound.volume = 0.4;
 
@@ -127,13 +130,14 @@ window.addEventListener("DOMContentLoaded", async () => {
    factsList.medium = dataList.medium;
    factsList.long = dataList.long;
    selectedLength = localStorage.getItem("length") || "short";
-   await generateText();
    const modeClass = window.localStorage.getItem("mode");
    if (modeClass) {
       document.body.classList.add(modeClass);
    } else {
       document.body.classList.add("matrix");
    }
+   await generateText();
+
    addClass(document.querySelector(".char"), "current");
    document.querySelectorAll(".colors").forEach((item) => {
       const itemColorModeData = item.dataset.color;
@@ -276,8 +280,6 @@ game.addEventListener("keydown", (e) => {
       }
       if (!currentChar.nextSibling) {
          gameOver = true;
-         caret.style.display = "none";
-         words.style.opacity = "0.5";
          clearInterval(gameInterval); // Stop timer if user finishes early
          calculateWpmAndAccuracyNoTimer();
          removeClass(resultWrapper, "hidden");
@@ -419,7 +421,6 @@ const resetGame = async () => {
    totalTyped = 0;
    correctEntries = 0;
    gameStartTime = null;
-   words.style.opacity = "1";
    words.style.marginTop = "0px";
    caret.style.display = "block";
    addClass(document.getElementById("caret"), "caret-animation");
@@ -448,14 +449,37 @@ document.getElementById("reset").addEventListener("click", () => {
 //-----------------VOLUME BTN LOGIC ----------------------------------------//
 volumeBtn.addEventListener("click", () => {
    let volumeIcon = document.getElementById("volume-icon");
+   let volumeIconMobile = document.getElementById("volume-icon-mobile");
+
    if (volume) {
       volume = false;
       volumeIcon.classList.remove("fa-volume-high");
       volumeIcon.classList.add("fa-volume-xmark");
+      volumeIconMobile.classList.remove("fa-volume-high");
+      volumeIconMobile.classList.add("fa-volume-xmark");
    } else {
       volume = true;
       volumeIcon.classList.remove("fa-volume-xmark");
       volumeIcon.classList.add("fa-volume-high");
+      volumeIconMobile.classList.remove("fa-volume-xmark");
+      volumeIconMobile.classList.add("fa-volume-high");
+   }
+});
+volumeBtnMobile.addEventListener("click", () => {
+   let volumeIcon = document.getElementById("volume-icon");
+   let volumeIconMobile = document.getElementById("volume-icon-mobile");
+   if (volume) {
+      volume = false;
+      volumeIcon.classList.remove("fa-volume-high");
+      volumeIcon.classList.add("fa-volume-xmark");
+      volumeIconMobile.classList.remove("fa-volume-high");
+      volumeIconMobile.classList.add("fa-volume-xmark");
+   } else {
+      volume = true;
+      volumeIcon.classList.remove("fa-volume-xmark");
+      volumeIcon.classList.add("fa-volume-high");
+      volumeIconMobile.classList.remove("fa-volume-xmark");
+      volumeIconMobile.classList.add("fa-volume-high");
    }
 });
 
@@ -484,4 +508,16 @@ document.querySelectorAll(".colors").forEach((btn) => {
       localStorage.setItem("mode", mode);
       game.focus();
    });
+});
+//-----------------------------ham menu logic----------------------------------------------------
+
+mobileMenuOpenBtn.addEventListener("click", () => {
+   const mobileMenu = document.getElementById("mobile-nav");
+   mobileMenu.classList.remove("hidden");
+   mobileMenu.classList.add("fixed");
+});
+mobileMenuCloseBtn.addEventListener("click", () => {
+   const mobileMenu = document.getElementById("mobile-nav");
+   mobileMenu.classList.remove("fixed");
+   mobileMenu.classList.add("hidden");
 });

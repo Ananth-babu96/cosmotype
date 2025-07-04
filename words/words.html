@@ -22,7 +22,7 @@
          rel="stylesheet"
       />
    </head>
-   <body class="p-[22px] m-0 box-border relative">
+   <body class="p-[12px] m-0 box-border relative">
       <div
          id="result-box-wrapper"
          class="absolute top-0 left-0 h-[100vh] w-[100vw] hidden items-center justify-center z-[99]"
@@ -60,9 +60,14 @@
       <div
          class="bg-image absolute top-0 left-0 w-[100vw] h-[100vh] z-[-1]"
       ></div>
-      <header class="flex items-center justify-between px-[60px]">
-         <h1 id="mode-switch">Cosmo<span>type</span></h1>
-         <nav class="flex gap-[22px]">
+      <header
+         class="flex items-center justify-between px-[20px] md:px-[60px] relative"
+      >
+         <h1 id="mode-switch" class="hidden md:block">
+            Cosmo<span>type</span>
+         </h1>
+         <h1 id="mode-switch" class="block md:hidden">C<span>t</span></h1>
+         <nav class="gap-[22px] hidden md:flex">
             <p id="volume-btn">
                <i id="volume-icon" class="fa-solid fa-volume-high"></i>
             </p>
@@ -70,32 +75,53 @@
             <a href="../leaderboard/leaderboard.html">Leaderboard</a>
             <a href="./others/login.html">Login</a>
          </nav>
+         <div class="flex md:hidden items-center gap-[20px] text-[20px]">
+            <p id="volume-btn-mobile">
+               <i id="volume-icon-mobile" class="fa-solid fa-volume-high"></i>
+            </p>
+            <div class="text-[22px]">
+               <i class="fa-solid fa-bars" id="mobile-menu-open-btn"></i>
+            </div>
+         </div>
+
+         <div
+            id="mobile-nav"
+            class="hidden z-99 top-0 left-0 w-[100%] h-[100vh] bg-[white]"
+         >
+            <div class="flex justify-end p-[20px] text-[22px]">
+               <i class="fa-solid fa-xmark" id="mobile-menu-close-btn"></i>
+            </div>
+            <nav
+               class="gap-[32px] flex flex-col items-center justify-center h-full text-[24px]"
+            >
+               <a href="../index.html">Facts</a>
+               <a href="../leaderboard/leaderboard.html">Leaderboard</a>
+               <a href="./others/login.html">Login</a>
+            </nav>
+         </div>
       </header>
       <section
-         class="flex items-center justify-around w-[70%] mx-auto my-[60px]"
+         class="flex items-center justify-center w-[70%] mx-auto my-[60px]"
       >
-         <ul class="flex gap-[12px] text-center length-list">
+         <ul class="flex gap-[22px] text-center length-list">
             <li
-               class="current-length cursor-pointer w-[100px] text-length"
+               class="current-length cursor-pointer w-[50px] text-length"
                data-duration="15"
             >
                15
             </li>
-            <li class="text-length cursor-pointer w-[100px]" data-duration="30">
+            <li class="text-length cursor-pointer w-[50px]" data-duration="30">
                30
             </li>
-            <li class="text-length cursor-pointer w-[100px]" data-duration="60">
+            <li class="text-length cursor-pointer w-[50px]" data-duration="60">
                60
             </li>
-            <li
-               class="text-length cursor-pointer w-[100px]"
-               data-duration="120"
-            >
+            <li class="text-length cursor-pointer w-[50px]" data-duration="120">
                120
             </li>
          </ul>
       </section>
-      <section class="flex items-center justify-center">
+      <section class="flex items-center justify-center w-[70%] mx-auto">
          <div id="words-menu" class="flex gap-[16px] text-[14px] font-[400]">
             <div class="flex items-center justify-center">
                <p class="wordsFrom cursor-pointer" data-words="eng200">
@@ -125,14 +151,14 @@
          </div>
       </section>
       <section
-         class="relative w-[70%] mx-auto"
+         class="relative w-[90%] md:w-[70%] mx-auto"
          id="words-container"
          tabindex="0"
       >
          <div id="focus-error">Click Here To Focus</div>
          <div
             id="words"
-            class="text-[34px] font-[500] tracking-[2px] cursor-pointer"
+            class="text-[22px] md:text-[34px] font-[500] tracking-[2px] cursor-pointer"
          ></div>
          <div
             id="caret"
@@ -154,7 +180,10 @@
       </section>
 
       <section class="flex items-center justify-center mt-[64px]">
-         <div id="colors-menu" class="flex gap-[16px] text-[14px] font-[400]">
+         <div
+            id="colors-menu"
+            class="flex gap-[12px] md:gap-[16px] text-[12px] md:text-[14px] font-[400]"
+         >
             <div class="flex items-center justify-center">
                <p class="colors" data-color="matrix">Matrix</p>
             </div>

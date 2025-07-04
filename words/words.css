@@ -19,6 +19,7 @@
 body {
    font-family: "Montserrat", sans-serif;
    transition: all 0.2s ease-in;
+   user-select: none;
 }
 
 h1 {
@@ -198,6 +199,21 @@ body.matrix #restart-button {
 body.matrix #volume-btn {
    color: var(--matrix);
 }
+body.matrix #mobile-nav {
+   background: #011108;
+}
+body.matrix #mobile-nav nav a {
+   color: var(--matrix);
+}
+body.matrix #mobile-menu-open-btn {
+   color: var(--matrix);
+}
+body.matrix #volume-btn-mobile {
+   color: var(--matrix);
+}
+body.matrix #mobile-menu-close-btn {
+   color: var(--matrix);
+}
 /* ===============================quantum mode======================================= */
 
 body.quantum {
@@ -271,6 +287,21 @@ body.quantum #restart-button {
    background: var(--purple);
 }
 body.quantum #volume-btn {
+   color: var(--purple);
+}
+body.quantum #mobile-nav {
+   background: #0e081b;
+}
+body.quantum #mobile-nav nav a {
+   color: var(--purple);
+}
+body.quantum #mobile-menu-open-btn {
+   color: var(--purple);
+}
+body.quantum #volume-btn-mobile {
+   color: var(--purple);
+}
+body.quantum #mobile-menu-close-btn {
    color: var(--purple);
 }
 /* =================================================================================== */
@@ -351,6 +382,15 @@ body.ghostline #restart-button {
 body.ghostline #volume-btn {
    color: #686868;
 }
+body.ghostline #mobile-nav nav a {
+   color: #686868;
+}
+body.ghostline #mobile-menu-open-btn {
+   color: #686868;
+}
+body.ghostline #volume-btn-mobile {
+   color: #686868;
+}
 /* =================================================================================== */
 /* ===============================light mode======================================= */
 
@@ -428,6 +468,21 @@ body.void #restart-button {
    color: #000;
 }
 body.void #volume-btn {
+   color: #d6e3ff;
+}
+body.void #mobile-nav {
+   background: var(--xeno);
+}
+body.void #mobile-nav nav a {
+   color: #d6e3ff;
+}
+body.void #mobile-menu-open-btn {
+   color: #d6e3ff;
+}
+body.void #volume-btn-mobile {
+   color: #d6e3ff;
+}
+body.void #mobile-menu-close-btn {
    color: #d6e3ff;
 }
 /* =================================================================================== */
@@ -553,6 +608,21 @@ body.suncode #restart-button {
 }
 body.suncode #volume-btn {
    color: #fff;
+}
+body.suncode #mobile-nav {
+   background: #292929;
+}
+body.suncode #mobile-nav nav a {
+   color: #fff;
+}
+body.suncode #mobile-menu-open-btn {
+   color: var(--sun);
+}
+body.suncode #volume-btn-mobile {
+   color: var(--sun);
+}
+body.suncode #mobile-menu-close-btn {
+   color: var(--sun);
 }
 /* =================================================================================== */
 
