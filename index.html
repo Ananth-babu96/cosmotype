@@ -1,7 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
+      <meta charset="UTF-8" />
+      <meta
+         name="title"
+         content="CosmoType — Test Your Speed. Discover Cool Facts."
+      />
+      <meta
+         name="description"
+         content="Take a typing speed test with CosmoType — a beautifully designed typing app that feeds your brain with fun, interesting facts while you improve your WPM and accuracy."
+      />
+      <meta
+         name="keywords"
+         content="typing test, typing speed, typing practice, WPM test, fun typing app, CosmoType, interesting facts typing"
+      />
+      <meta name="author" content="Ananth" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="canonical" href="https://www.cosmotype.com" />
+
+      <meta
+         name="description"
+         content="CosmoType — A fast, minimalist typing test filled with fun facts to keep your mind engaged."
+      />
+      <meta property="og:type" content="website" />
+      <meta property="og:url" content="https://www.cosmotype.com" />
+      <meta
+         property="og:title"
+         content="CosmoType — Test Your Speed. Discover Cool Facts."
+      />
+      <meta
+         property="og:description"
+         content="Take a typing speed test with CosmoType — a beautifully designed typing app that feeds your brain with fun, interesting facts while you improve your WPM and accuracy."
+      />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:url" content="https://www.cosmotype.com" />
+      <meta
+         name="twitter:title"
+         content="CosmoType — Test Your Speed. Discover Cool Facts."
+      />
+      <meta
+         name="twitter:description"
+         content="Take a typing speed test with CosmoType — a beautifully designed typing app that feeds your brain with fun, interesting facts while you improve your WPM and accuracy."
+      />
+
+      <title>CosmoType - Test Your Speed. Discover Cool Facts.</title>
+
+      <!-- CSS -->
       <link rel="stylesheet" href="style.css" />
+      <link rel="stylesheet" href="output.css" />
+      <link rel="icon" href="cosmotype_favicon-01.png" type="image/png" />
+
       <link
          rel="stylesheet"
          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -9,175 +57,333 @@
          crossorigin="anonymous"
          referrerpolicy="no-referrer"
       />
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Document</title>
-      <link href="output.css" rel="stylesheet" />
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+      <!-- Fonts -->
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
       <link
-         href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap"
+         href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;600;700&family=JetBrains+Mono:wght@300;400;700&display=swap"
          rel="stylesheet"
       />
+      <!-- In the <head> of test.html -->
+      <script type="application/ld+json">
+         {
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "CosmoType",
+            "operatingSystem": "All",
+            "applicationCategory": "EducationalApplication",
+            "description": "CosmoType is a free web-based typing test app where you can challenge yourself with different modes and track your typing speed and accuracy.",
+            "url": "https://www.typingtitans.com/test.html",
+            "browserRequirements": "Requires JavaScript enabled browser",
+            "creator": {
+               "@type": "Person",
+               "name": "Ananth",
+               "url": "https://www.cosmotype.com/"
+            },
+            "offers": {
+               "@type": "Offer",
+               "price": "0",
+               "priceCurrency": "USD"
+            }
+         }
+      </script>
    </head>
-   <body class="p-[12px] m-0 box-border relative">
-      <div
-         id="result-box-wrapper"
-         class="absolute top-0 left-0 h-[100vh] w-[100vw] hidden items-center justify-center z-[99]"
+
+   <body class="p-[12px] m-0 box-border relative theme">
+      <header
+         class="flex items-center justify-between px-[20px] md:px-[60px]"
+         role="banner"
       >
-         <div
-            id="result-box"
-            class="h-[50%] w-[270px] bg-[] flex flex-col items-center justify-around"
-         >
-            <div class="text-[18px] flex justify-between px-[28px] w-[100%]">
-               <div class="text-left flex flex-col gap-[14px] result-titles">
-                  <p>WPM</p>
-                  <p>Accuracy</p>
-                  <p>Raw Speed</p>
-                  <p>Keystrokes</p>
-                  <p>Clean Hits</p>
-                  <p>Typos</p>
-               </div>
-               <div class="text-left flex flex-col gap-[14px] result-data">
-                  <p id="wpm">33</p>
-                  <p id="accuracy">43%</p>
-                  <p id="raw">22</p>
-                  <p id="keystrokes">34</p>
-                  <p id="cleanHits">34</p>
-                  <p id="typos" class="text-[red]">54</p>
-               </div>
-            </div>
+         <h1 class="hidden md:block">Cosmo<span>type</span></h1>
+         <div class="block md:hidden text-xl font-bold">C<span>t</span></div>
+
+         <nav class="gap-[22px] hidden md:flex" aria-label="Main navigation">
             <button
-               id="restart-button"
-               class="text-[black] font-[600] w-[100px] px-[8px] cursor-pointer rounded-[4px]"
+               id="volume-btn"
+               aria-label="Toggle volume"
+               class="cursor-pointer"
             >
-               Restart
+               <i
+                  id="volume-icon"
+                  class="fa-solid fa-volume-high"
+                  aria-hidden="true"
+               ></i>
+            </button>
+            <a
+               href="./feedback/feedback.html"
+               class="feedback-btn rounded font-[500] px-[12px]"
+               role="link"
+               >Feedback</a
+            >
+         </nav>
+
+         <div class="flex md:hidden items-center gap-[20px] text-[20px]">
+            <button id="volume-btn-mobile" aria-label="Toggle volume (mobile)">
+               <i
+                  id="volume-icon-mobile"
+                  class="fa-solid fa-volume-high"
+                  aria-hidden="true"
+               ></i>
+            </button>
+            <button id="mobile-menu-open-btn" aria-label="Open mobile menu">
+               <i class="fa-solid fa-bars"></i>
             </button>
          </div>
-      </div>
-      <div
-         class="bg-image absolute top-0 left-0 w-[100vw] h-[100vh] z-[-1]"
-      ></div>
-      <header class="flex items-center justify-between px-[20px] md:px-[60px]">
-         <h1 id="mode-switch" class="hidden md:block">
-            Cosmo<span>type</span>
-         </h1>
-         <h1 id="mode-switch" class="block md:hidden">C<span>t</span></h1>
-         <nav class="gap-[22px] hidden md:flex">
-            <p id="volume-btn">
-               <i id="volume-icon" class="fa-solid fa-volume-high"></i>
-            </p>
-            <a href="./words/words.html">Words</a>
-            <a href="./leaderboard/leaderboard.html">Leaderboard</a>
-            <a href="./others/login.html">Login</a>
-         </nav>
-         <div class="flex md:hidden items-center gap-[20px] text-[20px]">
-            <p id="volume-btn-mobile">
-               <i id="volume-icon-mobile" class="fa-solid fa-volume-high"></i>
-            </p>
-            <div class="text-[22px]">
-               <i class="fa-solid fa-bars" id="mobile-menu-open-btn"></i>
-            </div>
-         </div>
-         <div
+
+         <nav
             id="mobile-nav"
-            class="hidden z-99 top-0 left-0 w-[100%] h-[100vh] bg-[white]"
+            class="hidden z-50 top-0 left-0 w-full h-screen bg-white"
+            aria-label="Mobile navigation"
          >
             <div class="flex justify-end p-[20px] text-[22px]">
-               <i class="fa-solid fa-xmark" id="mobile-menu-close-btn"></i>
+               <button
+                  id="mobile-menu-close-btn"
+                  aria-label="Close mobile menu"
+               >
+                  <i class="fa-solid fa-xmark"></i>
+               </button>
             </div>
-            <nav
+            <ul
                class="gap-[32px] flex flex-col items-center justify-center h-full text-[24px]"
             >
-               <a href="./words/words.html">Words</a>
-               <a href="./leaderboard/leaderboard.html">Leaderboard</a>
-               <a href="./others/login.html">Login</a>
-            </nav>
-         </div>
+               <li><a href="./feedback/feedback.html">Feedback</a></li>
+            </ul>
+         </nav>
       </header>
-      <section
-         class="flex items-center justify-around w-[70%] mx-auto my-[80px]"
-      >
-         <ul class="flex gap-[12px] text-center length-list">
-            <li
-               class="current-length cursor-pointer w-[70px] text-length"
-               data-length="short"
+
+      <main>
+         <!-- Timer -->
+         <section
+            class="w-[90%] mx-auto flex justify-center items-center h-[100px] mt-[80px]"
+            aria-label="Timer"
+         >
+            <div
+               id="timeleft"
+               class="top-[-20px] left-0 font-[600] text-[22px] z-9"
+               aria-live="polite"
             >
-               Short
-            </li>
-            <li
-               class="text-length cursor-pointer w-[70px]"
-               data-length="medium"
+               15
+            </div>
+         </section>
+
+         <!-- Typing Area -->
+         <section
+            class="relative w-[90%] md:w-[70%] mx-auto mt-[-40px] mb-[40px]"
+            id="words-container"
+            tabindex="0"
+            role="region"
+            aria-label="Typing test area"
+         >
+            <div id="focus-error" role="alert">Press any key to focus..</div>
+            <div
+               id="words"
+               class="text-[22px] md:text-[24px] font-[300] tracking-[2px]"
+            ></div>
+            <div
+               id="caret"
+               class="absolute top-[4px] left-0 h-[28px] w-[3px] caret-animation"
+               aria-hidden="true"
+            ></div>
+         </section>
+
+         <!-- Test Result -->
+         <section
+            id="test-result"
+            class="hidden w-[70%] mx-auto mt-[-60px] mb-[40px] flex-col items-center justify-center gap-[24px]"
+            aria-labelledby="results-heading"
+         >
+            <h2 id="results-heading" class="sr-only">Typing Test Results</h2>
+            <div class="flex gap-[24px]">
+               <div
+                  class="h-[140px] w-[140px] rounded-[50%] flex items-center justify-center flex-col italic"
+                  id="wpm-circle"
+                  aria-label="Words Per Minute"
+               >
+                  <p class="text-[42px] font-[500]" id="wpm">45</p>
+                  <p>wpm</p>
+               </div>
+               <div
+                  class="h-[140px] w-[140px] rounded-[50%] flex items-center justify-center flex-col italic"
+                  id="raw-circle"
+                  aria-label="Raw speed"
+               >
+                  <p class="text-[42px] font-[500]" id="raw">49</p>
+                  <p>raw</p>
+               </div>
+               <div
+                  class="h-[140px] w-[140px] rounded-[50%] flex items-center justify-center flex-col italic"
+                  id="accuracy-circle"
+                  aria-label="Accuracy"
+               >
+                  <p class="text-[42px] font-[500]">
+                     <span id="accuracy">95</span
+                     ><span class="text-[20px]">%</span>
+                  </p>
+                  <p>accuracy</p>
+               </div>
+            </div>
+            <div class="text-center" aria-label="Tip">
+               <h3 class="text-[20px] font-[600]">Tip</h3>
+               <p id="tip">Focus on Accuracy, Speed comes naturally...</p>
+            </div>
+         </section>
+
+         <!-- Controls -->
+         <section
+            class="flex justify-center gap-[22px] mx-auto w-[90%] md:w-[70%]"
+            aria-label="Test controls"
+         >
+            <button
+               id="wait"
+               class="text-[14px] w-[30px] h-[30px] rounded-[50%] font-[500]"
+               aria-label="Wait"
             >
-               Medium
-            </li>
-            <li class="text-length cursor-pointer w-[70px]" data-length="long">
-               Long
-            </li>
-         </ul>
-      </section>
-      <section
-         class="w-[90%] mx-auto flex justify-center items-center h-[100px]"
-      >
-         <div
-            class="top-[-20px] left-0 font-[600] text-[22px] z-9"
-            id="timeleft"
+               <i class="fa-solid fa-rotate"></i>
+            </button>
+            <button
+               id="reset"
+               class="text-[14px] w-[30px] h-[30px] rounded-[50%] font-[500]"
+               aria-label="Reset test"
+            >
+               <i class="fa-solid fa-arrow-right"></i>
+            </button>
+         </section>
+
+         <!-- Test Modes -->
+         <section
+            id="test-modes-menu"
+            class="rounded w-[280px] md:w-[640px] mx-auto mt-[40px]"
+            aria-label="Choose test mode"
          >
-            15
-         </div>
-      </section>
-      <section
-         class="relative w-[90%] md:w-[70%] mx-auto"
-         id="words-container"
-         tabindex="0"
-      >
-         <div id="focus-error">Click Here To Focus</div>
-         <div
-            id="words"
-            class="text-[22px] md:text-[34px] font-[500] tracking-[2px] cursor-pointer"
-         ></div>
-         <div
-            id="caret"
-            class="absolute top-[4px] left-0 h-[28px] w-[3px] caret-animation"
-         ></div>
-      </section>
-      <section
-         id="result-board"
-         class="flex mx-auto items-center w-[90%] justify-start gap-[80px] mt-[60px] mb-[40px]"
-      ></section>
-      <section class="flex justify-center">
-         <button
-            class="text-[18px] px-[8px] rounded-[4px] cursor-pointer w-[100px] font-[500]"
-            id="reset"
+            <ul
+               class="grid gap-[12px] grid-cols-3 md:grid-cols-5 w-full justify-items-center text-[12px] md:text-[14px]"
+            >
+               <li
+                  class="flex justify-center items-center h-full w-full border-[1px] rounded test-mode"
+                  data-mode="facts"
+                  tabindex="0"
+                  role="button"
+               >
+                  Facts
+               </li>
+               <li
+                  class="flex justify-center items-center h-full w-full border-[1px] rounded test-mode"
+                  data-mode="english200"
+                  tabindex="0"
+                  role="button"
+               >
+                  <span class="hidden md:inline">English 200</span>
+                  <span class="inline md:hidden">Eng200</span>
+               </li>
+               <li
+                  class="flex justify-center items-center h-full w-full border-[1px] rounded test-mode"
+                  data-mode="english1k"
+                  tabindex="0"
+                  role="button"
+               >
+                  <span class="hidden md:inline">English 1k</span>
+                  <span class="inline md:hidden">Eng-1k</span>
+               </li>
+               <li
+                  class="flex justify-center items-center h-full w-full border-[1px] rounded test-mode"
+                  data-mode="english10k"
+                  tabindex="0"
+                  role="button"
+               >
+                  <span class="hidden md:inline">English 10k</span>
+                  <span class="inline md:hidden">Eng-10k</span>
+               </li>
+               <li
+                  class="flex w-full h-full items-center justify-center border-[1px] rounded test-mode"
+                  data-mode="numbers"
+                  tabindex="0"
+                  role="button"
+               >
+                  Numbers
+               </li>
+            </ul>
+         </section>
+
+         <!-- Test Length -->
+         <section
+            id="test-length-menu"
+            class="rounded w-[250px] md:w-[350px] mx-auto mt-[40px]"
+            aria-label="Choose test length"
          >
-            <!-- <i class="fa-solid fa-rotate"></i> -->
-            reset
-         </button>
-      </section>
-      <section class="flex items-center justify-center mt-[64px]">
-         <div
-            id="colors-menu"
-            class="flex gap-[12px] md:gap-[16px] text-[12px] md:text-[14px] font-[400]"
+            <ul
+               class="grid gap-[12px] grid-cols-3 w-full justify-items-center text-[14px]"
+            >
+               <li
+                  class="flex justify-center border-[1px] rounded font-[600] w-full h-full text-length"
+                  data-length="short"
+                  tabindex="0"
+                  role="button"
+               >
+                  Short
+               </li>
+               <li
+                  class="flex justify-center border-[1px] rounded w-full h-full text-length"
+                  data-length="medium"
+                  tabindex="0"
+                  role="button"
+               >
+                  Medium
+               </li>
+               <li
+                  class="flex justify-center border-[1px] rounded w-full h-full text-length"
+                  data-length="long"
+                  tabindex="0"
+                  role="button"
+               >
+                  Long
+               </li>
+            </ul>
+         </section>
+
+         <!-- Theme Colors -->
+         <section
+            class="flex items-center justify-center mt-[84px] w-[90%] fixed bottom-[22px]"
+            id="color-modes-section"
+            aria-label="Theme selector"
          >
-            <div class="flex items-center justify-center">
-               <p class="colors" data-color="matrix">Matrix</p>
+            <div
+               id="colors-menu"
+               class="flex gap-[12px] md:gap-[16px] text-[12px] md:text-[14px] font-[400]"
+            >
+               <p class="colors" data-color="matrix" role="button" tabindex="0">
+                  Matrix
+               </p>
+               <p
+                  class="colors"
+                  data-color="quantum"
+                  role="button"
+                  tabindex="0"
+               >
+                  Quantum
+               </p>
+               <p class="colors" data-color="void" role="button" tabindex="0">
+                  Void
+               </p>
+               <p
+                  class="colors"
+                  data-color="ghostline"
+                  role="button"
+                  tabindex="0"
+               >
+                  Ghostline
+               </p>
+               <p
+                  class="colors"
+                  data-color="suncode"
+                  role="button"
+                  tabindex="0"
+               >
+                  Suncode
+               </p>
             </div>
-            <div class="flex items-center justify-center">
-               <p class="colors" data-color="quantum">Quantum</p>
-            </div>
-            <div class="flex items-center justify-center">
-               <p class="colors" data-color="void">Void</p>
-            </div>
-            <div class="flex items-center justify-center">
-               <p class="colors" data-color="ghostline">Ghostline</p>
-            </div>
-            <div class="flex items-center justify-center">
-               <p class="colors" data-color="suncode">Suncode</p>
-            </div>
-         </div>
-      </section>
+         </section>
+      </main>
 
       <script type="module" src="main.js"></script>
    </body>

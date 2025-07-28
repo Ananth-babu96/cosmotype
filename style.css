@@ -1,13 +1,4 @@
 :root {
-   --light-mode-bg: #f9f9f9;
-   --light-mode-font: #292929;
-   --light-mode-primary: #1e90ff;
-   --dark-mode-bg: #202020;
-   --dark-one-primary: #ffe400;
-   --dark-two-primary: #00ff7f;
-   --dark-three-primary: #00ffff;
-   --dark-words-color: #2c2c2c;
-
    --matrix: #00ff7f;
    --purple: #394edb;
    --light: #d83f87;
@@ -17,8 +8,10 @@
 }
 
 body {
-   font-family: "Montserrat", sans-serif;
+   font-family: "Source Code Pro", monospace;
    transition: all 0.2s ease-in;
+   cursor: default;
+   user-select: none;
 }
 
 h1 {
@@ -26,23 +19,35 @@ h1 {
    font-weight: 600;
 }
 
-.btn {
-   background: rgb(195, 102, 20);
-   width: fit-content;
-   height: 30px;
-   padding: 0 12px;
-   border-radius: 12px;
-   color: #fff;
-   font-weight: 500;
-}
-.current-length {
+.current-length,
+.current-mode {
    font-weight: 600;
    padding: 0 12px;
-   border-radius: 4px;
+   /* border-radius: 4px; */
+}
+#color-modes-section {
+   left: 50%;
+   transform: translateX(-50%);
+}
+
+.great {
+   border: 4px solid var(--matrix);
+}
+.good {
+   border: 4px solid #ffeb3b;
+}
+.okay {
+   border: 4px solid #ff9800;
+}
+.bad {
+   border: 4px solid #f44336;
+}
+#test-result {
+   color: #fff;
 }
 /* =================== Words Container =================== */
 #words-container {
-   font-family: "Courier Prime", monospace;
+   font-family: "JetBrains Mono", monospace;
    height: 140px;
    overflow: hidden;
    outline: none;
@@ -77,16 +82,22 @@ h1 {
    top: 50%;
    left: 50%;
    transform: translate(-50%, -50%);
-   font-size: 24px;
+   font-size: 18px;
    font-family: "Montserrat";
    font-weight: 500;
-   display: none;
+   display: flex;
+   color: white;
 }
 
-#words-container:focus #focus-error {
+#words-container:focus-within #focus-error {
    display: none;
 }
-
+.hide-cursor {
+   cursor: none;
+}
+#test-modes-menu > ul > li {
+   transition: all 0.4s ease;
+}
 /* =================== Result & Caret =================== */
 #result-board {
    display: flex;
@@ -97,7 +108,8 @@ h1 {
    display: none;
 }
 #words-container #words {
-   opacity: 0.4;
+   opacity: 0.6;
+   filter: blur(3px) !important;
 }
 
 #words-container:focus-within #caret {
@@ -105,6 +117,7 @@ h1 {
 }
 #words-container:focus-within #words {
    opacity: 1;
+   filter: none !important;
 }
 
 .caret-animation {
@@ -130,9 +143,7 @@ body.matrix {
 body.matrix h1 {
    color: var(--matrix);
 }
-body.matrix h1 span {
-   color: #fff;
-}
+
 body.matrix a {
    color: var(--matrix);
 }
@@ -145,9 +156,18 @@ body.matrix .current-length {
    background: var(--matrix);
    color: black;
 }
-body.matrix #reset {
+body.matrix .current-mode {
    background: var(--matrix);
+   color: black;
 }
+body.matrix #reset,
+body.matrix #wait,
+body.matrix #result-page-reset,
+body.matrix #result-page-restart {
+   background: var(--matrix);
+   color: black;
+}
+
 body.matrix .length-list {
    color: white;
 }
@@ -205,6 +225,21 @@ body.matrix #volume-btn-mobile {
 body.matrix #mobile-menu-close-btn {
    color: var(--matrix);
 }
+body.matrix #test-modes-menu,
+body.matrix #test-length-menu {
+   /* border: 1px solid #047a3f; */
+   color: #047a3f;
+}
+body.matrix .feedback-btn {
+   background: var(--matrix);
+   color: #011108;
+}
+body.matrix #test-result {
+   background: #011108;
+}
+body.matrix #test-result {
+   color: #fff;
+}
 /* ===============================quantum mode======================================= */
 
 body.quantum {
@@ -228,8 +263,10 @@ body.quantum .current-length {
    background: var(--purple);
    color: black;
 }
-body.quantum #reset {
+body.quantum #reset,
+body.quantum #wait {
    background: var(--purple);
+   color: black;
 }
 body.quantum .length-list {
    color: white;
@@ -290,8 +327,23 @@ body.quantum #volume-btn-mobile {
 body.quantum #mobile-menu-close-btn {
    color: var(--purple);
 }
+body.quantum #test-modes-menu,
+body.quantum #test-length-menu {
+   color: var(--purple);
+}
+body.quantum .current-mode {
+   background: var(--purple);
+   color: #0e081b;
+}
+body.quantum #test-result {
+   color: #fff;
+}
+body.quantum .feedback-btn {
+   background: var(--purple);
+   color: #0e081b;
+}
 /* =================================================================================== */
-/* ===============================light mode======================================= */
+/* ===============================ghostline mode======================================= */
 
 body.ghostline {
    background: #d8d8d8;
@@ -315,7 +367,8 @@ body.ghostline .current-length {
    background: #000;
    color: #eae7dc;
 }
-body.ghostline #reset {
+body.ghostline #reset,
+body.ghostline #wait {
    background: #000;
    color: #eae7dc;
 }
@@ -356,6 +409,9 @@ body.ghostline .result-data {
    color: #000;
    font-weight: 600;
 }
+body.ghostline #focus-error {
+   color: #000;
+}
 body.ghostline #restart-button {
    background: #000;
    color: #fff;
@@ -372,8 +428,24 @@ body.ghostline #mobile-menu-open-btn {
 body.ghostline #volume-btn-mobile {
    color: #686868;
 }
+body.ghostline #test-modes-menu,
+body.ghostline #test-length-menu {
+   color: #000;
+}
+body.ghostline .current-mode {
+   background: #000;
+   color: #fff;
+}
+body.ghostline #test-result {
+   color: #000;
+}
+body.ghostline .feedback-btn {
+   background: #000;
+   color: #d8d8d8;
+}
+
 /* =================================================================================== */
-/* ===============================light mode======================================= */
+/* ===============================void mode======================================= */
 
 body.void {
    background: var(--xeno);
@@ -390,13 +462,14 @@ body.void a {
 }
 body.void #words-container #words {
    filter: none;
-   color: #2b3134;
+   color: #444d51;
 }
 body.void .current-length {
    background: #d6e3ff;
    color: var(--xeno);
 }
-body.void #reset {
+body.void #reset,
+body.void #wait {
    background: #d6e3ff;
    color: var(--xeno);
 }
@@ -459,55 +532,23 @@ body.void #volume-btn-mobile {
 body.void #mobile-menu-close-btn {
    color: #d6e3ff;
 }
+body.void #test-modes-menu,
+body.void #test-length-menu {
+   color: #d6e3ff;
+}
+body.void .current-mode {
+   background: #d6e3ff;
+   color: #000;
+}
+body.void #test-result {
+   color: #fff;
+}
+body.void .feedback-btn {
+   background: #d6e3ff;
+   color: var(--xeno);
+}
 /* =================================================================================== */
-/* ===============================gorgeous mode======================================= */
 
-body.gorgeous {
-   background: #222629;
-}
-body.gorgeous h1 {
-   color: var(--gorgeous);
-}
-body.gorgeous h1 span {
-   color: #fff;
-}
-body.gorgeous a {
-   color: #61892f;
-   font-weight: 500;
-}
-body.gorgeous #words-container:focus #words {
-   filter: none;
-   color: #fff;
-}
-body.gorgeous .current-length {
-   background: var(--gorgeous);
-   color: #fff;
-}
-body.gorgeous #reset {
-   background: var(--gorgeous);
-   color: #fff;
-}
-body.gorgeous .length-list {
-   color: #fff;
-   font-weight: 500;
-}
-body.gorgeous .correct {
-   color: var(--gorgeous);
-}
-body.gorgeous .incorrect {
-   color: red;
-}
-body.gorgeous .underline {
-   text-decoration: underline;
-   text-decoration-color: red;
-}
-body.gorgeous #timeleft {
-   color: #61892f;
-}
-body.gorgeous #caret {
-   background: var(--gorgeous);
-}
-/* =================================================================================== */
 /* ===============================sun mode======================================= */
 
 body.suncode {
@@ -532,7 +573,8 @@ body.suncode .current-length {
    background: var(--sun);
    color: #fff;
 }
-body.suncode #reset {
+body.suncode #reset,
+body.suncode #wait {
    background: var(--sun);
    color: #fff;
 }
@@ -593,226 +635,19 @@ body.suncode #volume-btn-mobile {
 body.suncode #mobile-menu-close-btn {
    color: var(--sun);
 }
+body.suncode #test-modes-menu,
+body.suncode #test-length-menu {
+   color: var(--sun);
+}
+body.suncode .current-mode {
+   background: var(--sun);
+   color: #fff;
+}
+body.suncode #test-result {
+   color: #fff;
+}
+body.suncode .feedback-btn {
+   background: var(--sun);
+   color: #292929;
+}
 /* =================================================================================== */
-
-body.dark .game-settings-menu {
-   border: 2px solid var(--dark-three-primary);
-   color: var(--dark-three-primary);
-}
-body.dark #words {
-   color: var(--dark-words-color);
-}
-body.dark .correct {
-   color: #f1f1f1;
-}
-body.dark .incorrect {
-   color: #ff2200;
-}
-body.dark .underline {
-   text-decoration: underline;
-   text-decoration-color: #ff2200;
-}
-body.dark #timeleft {
-   color: #fff;
-}
-body.dark #result-board {
-   color: var(--dark-three-primary);
-}
-
-body.dark #reset {
-   color: black;
-   font-weight: 600;
-}
-body.dark #focus-error {
-   color: #fff;
-}
-body.dark #game-type-menu,
-body.dark #duration-menu,
-body.dark #theme-menu {
-   border: 2px solid var(--dark-three-primary);
-}
-body.dark .current-type {
-   background: orange;
-   color: var(--dark-mode-bg);
-   font-weight: 500;
-}
-body.dark .current-duration {
-   color: orange;
-}
-
-/* body.light {
-   background: var(--light-mode-bg);
-   color: var(--light-mode-font);
-}
-
-body.light .game-settings-menu {
-   background: var(--dark-three-primary);
-   color: var(--light-mode-bg);
-}
-
-body.light #timeleft,
-body.light #reset {
-   color: var(--dark-three-primary);
-}
-
-body.light .incorrect {
-   color: var(--dark-three-primary);
-} */
-
-/* =================== Theme: Dark Modes =================== */
-/* body.dark-one,
-body.dark-two,
-body.dark-three {
-   background: var(--dark-mode-bg);
-}
-
-body.dark-one,
-body.dark-two,
-body.dark-three {
-   color: var(--dark-one-primary);
-}
-
-body.dark-two {
-   color: var(--dark-two-primary);
-}
-
-body.dark-three {
-   color: var(--dark-three-primary);
-}
-
-body:is(.dark-one, .dark-two, .dark-three) #words-container #words {
-   color: var(--dark-words-color);
-}
-
-body:is(.dark-one, .dark-two, .dark-three) .result-title {
-   color: var(--dark-words-color);
-}
-
-body.dark-one .correct {
-   color: var(--dark-one-primary);
-}
-
-body.dark-two .correct {
-   color: var(--dark-two-primary);
-}
-
-body.dark-three .correct {
-   color: var(--light-mode-bg);
-}
-
-body.dark-one .incorrect {
-   color: #e34234;
-}
-body.dark-one .underline {
-   text-decoration-color: #e34234;
-}
-
-body.dark-two .incorrect {
-   color: #e34234;
-}
-body.dark-two .underline {
-   text-decoration-color: #e34234;
-}
-
-body.dark-three .incorrect {
-   color: var(--dark-three-primary);
-}
-
-body.dark-one .game-settings-menu {
-   background: var(--dark-one-primary);
-   color: var(--dark-mode-bg);
-}
-
-body.dark-two .game-settings-menu {
-   background: var(--dark-two-primary);
-   color: var(--dark-mode-bg);
-}
-
-body.dark-three .game-settings-menu {
-   background: var(--dark-three-primary);
-   color: var(--dark-mode-bg);
-}
-
-body.dark-one #wpm,
-body.dark-one #accuracy {
-   color: var(--dark-one-primary);
-}
-
-body.dark-two #wpm,
-body.dark-two #accuracy {
-   color: var(--dark-two-primary);
-}
-
-body.dark-three #wpm,
-body.dark-three #accuracy {
-   color: var(--dark-three-primary);
-}
-
-body.dark-one #timeleft,
-body.dark-one #reset {
-   color: var(--dark-one-primary);
-}
-
-body.dark-two #timeleft,
-body.dark-two #reset {
-   color: var(--dark-two-primary);
-}
-
-body.dark-three #timeleft,
-body.dark-three #reset {
-   color: var(--dark-three-primary);
-}
-
-body.light #game-type-menu,
-body.light #duration-menu,
-body.light #theme-menu {
-   background: var(--dark-three-primary);
-   border: 2px solid var(--dark-three-primary);
-}
-body.dark-one #game-type-menu,
-body.dark-one #duration-menu,
-body.dark-one #theme-menu {
-   background: var(--dark-one-primary);
-   border: 2px solid var(--dark-one-primary);
-}
-body.dark-two #game-type-menu,
-body.dark-two #duration-menu,
-body.dark-two #theme-menu {
-   background: var(--dark-two-primary);
-   border: 2px solid var(--dark-two-primary);
-}
-body.dark-three #game-type-menu,
-body.dark-three #duration-menu,
-body.dark-three #theme-menu {
-   background: var(--dark-three-primary);
-   border: 2px solid var(--dark-three-primary);
-}
-
-body.light .current-duration,
-body.light .game-type.current-type,
-body.light .theme.current-theme {
-   background: var(--light-mode-bg);
-   color: var(--dark-three-primary);
-   font-weight: 500;
-}
-body.dark-one .current-duration,
-body.dark-one .game-type.current-type,
-body.dark-one .current-theme {
-   background: var(--dark-mode-bg);
-   color: var(--dark-one-primary);
-   font-weight: 500;
-}
-body.dark-two .current-duration,
-body.dark-two .game-type.current-type,
-body.dark-two .current-theme {
-   background: var(--dark-mode-bg);
-   color: var(--dark-two-primary);
-   font-weight: 500;
-}
-body.dark-three .current-duration,
-body.dark-three .game-type.current-type,
-body.dark-three .current-theme {
-   background: var(--dark-mode-bg);
-   color: var(--dark-three-primary);
-   font-weight: 800;
-} */

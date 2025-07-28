@@ -1,0 +1,37 @@
+{
+   "tips_below_40_wpm": [
+      "Focus on accuracy first, spped will follow.",
+      "Look at the screen, not your fingers.",
+      "Master the home row kyes (ASDF JKL;) - it's your foundation.",
+      "Don't be discouraged, even pros started slow.",
+      "Repeat short typing exercises daily - consistency matters more than speed.",
+      "Use all fingers, even if it feels weird at first - trust the process.",
+      "Say the letters in mind as you type, it builds awareness",
+      "Think ahead, raed a few words in advance",
+      "Sit with good posture and hand position"
+   ],
+   "tips_40_60_wpm": [
+      "Fine-tune finger movements - reduce unnecessary motion.",
+      "Practice with harder word sets to challenge your reflexes.",
+      "Learn to trust muscle memory - stop overthinking each key.",
+      "Track accuracy more than speed - clean runs build momentum.",
+      "Use short bursts of speed, then aim to sustain it longer.",
+      "Practice punctuation and symbols - they slow many down.",
+      "Review your common mistakes and focus on those letters or words.",
+      "Build flow — keep a steady rhythm instead of rushing.",
+      "Avoid hovering over Backspace - train to type it right the first time.",
+      "Set small goals (e.g., 50 WPM with 98% accuracy) and level up slowly."
+   ],
+   "tips_above_60_wpm": [
+      "Focus on consistency — smooth, error-free runs matter more than speed spikes.",
+      "Identify weak keys or combos (like QP or ZX) and drill them intentionally.",
+      "Practice with longer and more complex paragraphs to build endurance.",
+      "Push your limits occasionally with high-speed bursts, then return to control.",
+      "Refine finger travel — even slight overreach slows you down over time.",
+      "Learn to quickly recover from mistakes without breaking rhythm.",
+      "Minimize backspacing — it's better to finish clean than to panic over typos.",
+      "Experiment with new layouts (like Colemak or Dvorak) only if you're hitting a wall.",
+      "Use real-world texts (code, articles, quotes) to stay mentally engaged.",
+      "Take breaks — fatigue ruins accuracy and trains bad habits."
+   ]
+}

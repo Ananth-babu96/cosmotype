@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="title" content="Feedback — CosmoType" />
+      <meta
+         name="description"
+         content="Share your experience with CosmoType. We value your feedback and use it to improve the app's design, features, and typing experience."
+      />
+      <meta
+         name="keywords"
+         content="CosmoType feedback, typing test feedback, share feedback, user suggestions, typing app improvements"
+      />
+      <meta name="author" content="Ananth" />
+      <link rel="canonical" href="https://www.cosmotype.com/feedback.html" />
+      <!-- Open Graph / Facebook -->
+      <meta property="og:type" content="website" />
+      <meta
+         property="og:url"
+         content="https://www.cosmotype.com/feedback.html"
+      />
+      <meta property="og:title" content="Feedback — CosmoType" />
+      <meta
+         property="og:description"
+         content="Have thoughts about CosmoType? Help us improve by sharing your feedback on design, speed test features, or user experience."
+      />
+      <!-- Twitter -->
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta
+         name="twitter:url"
+         content="https://www.cosmotype.com/feedback.html"
+      />
+      <meta name="twitter:title" content="Feedback — CosmoType" />
+      <meta
+         name="twitter:description"
+         content="Help improve CosmoType by submitting your feedback. Share your thoughts about our typing app’s design, features, or performance."
+      />
+      <meta
+         name="twitter:image"
+         content="https://www.cosmotype.com/preview.jpg"
+      />
+      <link rel="stylesheet" href="feedback.css" />
+      <link rel="icon" href="../cosmotype_favicon-01.png" type="image/png" />
+
+      <link
+         href="https://fonts.googleapis.com/css2?family=Audiowide&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap"
+         rel="stylesheet"
+      />
+      <link
+         rel="stylesheet"
+         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+         crossorigin="anonymous"
+         referrerpolicy="no-referrer"
+      />
+      <link rel="stylesheet" href="../output.css" />
+      <title>Feedback - CosmoType</title>
+      <script type="application/ld+json">
+         {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "Feedback -  CosmoType",
+            "url": "https://www.cosmotype.com/feedback.html",
+            "description": "Share your experience or suggestions about CosmoType. We value your feedback and use it to improve the app.",
+            "isPartOf": {
+               "@type": "WebSite",
+               "name": "CosmoType",
+               "url": "https://www.cosmotype.com"
+            },
+            "mainEntity": {
+               "@type": "Comment",
+               "text": "This app helped me improve my typing speed. I'd love to see more difficulty levels added.",
+               "author": {
+                  "@type": "Person",
+                  "name": "Anonymous"
+               }
+            }
+         }
+      </script>
+   </head>
+   <body class="py-[32px]">
+      <header
+         class="flex items-center justify-between px-[20px] md:px-[60px]"
+         role="banner"
+      >
+         <h1 class="hidden md:block text-[30px] font-[600]">
+            Cosmo<span>type</span>
+         </h1>
+         <div class="block md:hidden text-[30px] font-[600]">
+            C<span>t</span>
+         </div>
+
+         <nav class="gap-[22px] flex" aria-label="Main navigation">
+            <a
+               href="../index.html"
+               class="goback-btn rounded font-[500] px-[12px]"
+               role="link"
+               >Go Back</a
+            >
+         </nav>
+      </header>
+      <div class="form-container flex flex-col gap-[22px] w-[80%] md:w-[60%]">
+         <div>
+            <h2>Hey, got a minute?</h2>
+            <p>
+               I'd really love to hear what you think about the app. Whether
+               it's something you liked, didn't like, or think could be better -
+               your feedback means a lot to me.
+            </p>
+         </div>
+         <form id="feedback-form">
+            <input
+               class="px-[14px] md:px-[22px] rounded"
+               type="text"
+               name="name"
+               id=""
+               placeholder="Name"
+               required
+            />
+            <input
+               class="px-[14px] md:px-[22px] rounded"
+               type="email"
+               name="email"
+               id=""
+               placeholder="Email (optional)"
+            />
+            <textarea
+               class="p-[14px] md:p-[22px] rounded"
+               name="message"
+               id=""
+               placeholder="Your Feedback"
+               required
+            ></textarea>
+            <button type="submit" class="rounded">
+               <div id="loading-dots" class="hidden">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+               </div>
+               <span id="send-text">Send</span>
+            </button>
+         </form>
+         <div>
+            <h3>Thanks for sharing your thoughts!</h3>
+            <p>
+               I read every message personally, and your feedback truly helps me
+               make the app better for you and others.
+            </p>
+         </div>
+      </div>
+      <script src="feedback.js"></script>
+      <script
+         type="text/javascript"
+         src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+      ></script>
+   </body>
+</html>

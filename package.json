@@ -1,9 +1,8 @@
 {
-   "name": "typing-game-project",
+   "name": "frontend",
    "version": "1.0.0",
    "description": "",
-   "main": "server.js",
-   "type": "module",
+   "main": "main.js",
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "twind": "npx @tailwindcss/cli -i ./input.css -o ./output.css --watch"
@@ -12,10 +11,8 @@
    "author": "",
    "license": "ISC",
    "dependencies": {
-      "@tailwindcss/cli": "^4.1.8",
-      "cors": "^2.8.5",
-      "express": "^5.1.0",
-      "mysql2": "^3.14.1",
-      "tailwindcss": "^4.1.8"
+      "@emailjs/browser": "^4.4.1",
+      "@tailwindcss/cli": "^4.1.11",
+      "tailwindcss": "^4.1.11"
    }
 }

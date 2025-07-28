@@ -1,0 +1,195 @@
+:root {
+   --matrix: #00ff7f;
+   --purple: #394edb;
+   --light: #d83f87;
+   --xeno: #060709;
+   --gorgeous: #86c232;
+   --sun: #e1b514;
+}
+body {
+   background-color: rgb(235, 235, 235);
+   font-family: "Source Code Pro", monospace;
+}
+.form-container {
+   margin: 0 auto;
+   margin-top: 80px;
+   box-sizing: border-box;
+}
+form {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 100%;
+   margin: 0 auto;
+}
+input {
+   height: 40px;
+   width: 100%;
+   margin-bottom: 18px;
+   outline: none;
+   border: none;
+   background: #fff;
+   font-family: "Source Code Pro", monospace;
+}
+textarea {
+   margin-bottom: 18px;
+   background: #fff;
+   outline: none;
+   border: none;
+   height: 100px;
+   width: 100%;
+   resize: vertical;
+   max-height: 200px;
+   min-height: 100px;
+   font-family: "Source Code Pro", monospace;
+}
+button {
+   height: 40px;
+   background: #fff;
+   border: none;
+   font-family: "Source Code Pro", monospace;
+   font-weight: 600;
+   width: 200px;
+}
+p {
+   line-height: 28px;
+}
+h2 {
+   font-weight: 700;
+   font-size: 24px;
+}
+h3 {
+   font-weight: 700;
+   font-size: 20px;
+}
+
+#loading-dots {
+   align-items: center;
+   justify-content: center;
+   gap: 12px;
+}
+#loading-dots > div {
+   height: 10px;
+   width: 10px;
+   background: #000;
+   border-radius: 50%;
+   animation: dotsBlink 0.6s infinite;
+}
+#loading-dots > div:nth-child(1) {
+   animation-delay: 0s;
+}
+#loading-dots > div:nth-child(2) {
+   animation-delay: 0.2s;
+}
+#loading-dots > div:nth-child(3) {
+   animation-delay: 0.4s;
+}
+
+@keyframes dotsBlink {
+   0%,
+   100% {
+      transform: scale(0);
+   }
+   50% {
+      transform: scale(1);
+   }
+}
+/* --------------------------MATRIX---------------------------------  */
+body.matrix {
+   background: #011108;
+   color: var(--matrix);
+}
+body.matrix input,
+body.matrix textarea {
+   border: 1px solid var(--matrix);
+   background: transparent;
+}
+body.matrix form > button {
+   background: var(--matrix);
+   color: #011108;
+}
+body.matrix #mobile-menu-open-btn {
+   color: var(--matrix);
+   background: none;
+}
+body.matrix .goback-btn {
+   background: var(--matrix);
+   color: #011108;
+}
+
+/* ------------------------QUANTUM---------------------------------- */
+body.quantum {
+   background: #0e081b;
+   color: var(--purple);
+}
+body.quantum input,
+body.quantum textarea {
+   border: 1px solid var(--purple);
+   background: transparent;
+}
+body.quantum form > button {
+   background: var(--purple);
+   color: #0e081b;
+}
+
+body.quantum .goback-btn {
+   background: var(--purple);
+   color: #011108;
+}
+/* ------------------------VOID---------------------------------- */
+body.void {
+   background: var(--xeno);
+   color: #d6e3ff;
+}
+body.void input,
+body.void textarea {
+   border: 1px solid #d6e3ff;
+   background: transparent;
+}
+body.void form > button {
+   background: #d6e3ff;
+   color: var(--xeno);
+}
+
+body.void .goback-btn {
+   background: #d6e3ff;
+   color: var(--xeno);
+}
+/* ------------------------GHOSTLINE---------------------------------- */
+body.ghostline {
+   background: #d8d8d8;
+   color: #454444;
+}
+body.ghostline input,
+body.ghostline textarea {
+   border: 1px solid #454444;
+   background: transparent;
+}
+body.ghostline form > button {
+   background: #454444;
+   color: #d8d8d8;
+}
+
+body.ghostline .goback-btn {
+   background: #454444;
+   color: #d8d8d8;
+}
+/* ------------------------SUNCODE---------------------------------- */
+body.suncode {
+   background: #292929;
+   color: var(--sun);
+}
+body.suncode input,
+body.suncode textarea {
+   border: 1px solid var(--sun);
+   background: transparent;
+}
+body.suncode form > button {
+   background: var(--sun);
+   color: #292929;
+}
+
+body.suncode .goback-btn {
+   background: var(--sun);
+   color: #292929;
+}
